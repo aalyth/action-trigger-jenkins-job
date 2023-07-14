@@ -1,0 +1,26 @@
+name: Jenkins Trigger
+description: Runs a Jenkins Job from a given URL.
+
+inputs:
+  url:
+    description: A URL to access the Jenkins.
+    required: true
+
+  job:
+    description: The Jenkins Job to be triggered.
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Trigger Job
+      id: trigger-job
+      shell: sh
+      run: |
+        JENKINS_URL="${{ inputs.url }}"
+        JENKINS_JOB="${{ inputs.job }}"
+
+        wget "${JENKINS_URL}/jnlpJars/jenkins-cli.jar" -o /dev/null
+
+        java -jar jenkins-cli.jar -s "${JENKINS_URL}/" build "$JENKINS_JOB" -w 
+   

@@ -22,5 +22,5 @@ runs:
 
         wget "${JENKINS_URL}/jnlpJars/jenkins-cli.jar" -o /dev/null
 
-        java -jar jenkins-cli.jar -s "${JENKINS_URL}/" build "$JENKINS_JOB" -w 
+        java -jar jenkins-cli.jar -s "${JENKINS_URL}/" build "$JENKINS_JOB" -s -v
    
